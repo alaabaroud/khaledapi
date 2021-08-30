@@ -1,5 +1,6 @@
 const axios = require('axios');
- 
+const coctailMongo= require('./coctailMongo')
+
 
 const addCoctail= async (req, res )=> {
     const { strDrink, strDrinkThumb} =req.body;
@@ -18,4 +19,14 @@ const getFavorite = async (req ,res )=> {
     } ) 
 }
 
-module.exports = {addCoctail, getFavorite }
+const deleteFavorite = async (req, res) => {
+    const {c_id}= req.params;
+    coctailMongo.remove({_id:c_id}, (err, data) => {
+        coctailMongo.find({}, (err, data) =>{
+            res.send(data);
+    
+        } ) 
+    })
+}
+
+module.exports = {addCoctail, getFavorite, deleteFavorite}

@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 8000;
 mongoose.connect('mongodb://localhost:27017/cocktail', {useNewUrlParser: true, useUnifiedTopology: true});
 /////////////////////////////////
 const getCoctail = require('./Controller/Coctail')
-const {addCoctail, getFavorite } = require('./crud')
+const {addCoctail, getFavorite, deleteFavorite } = require('./crud')
 
 ////////////////////
 app.get ("/" , (req ,res ) =>{
@@ -27,6 +27,8 @@ app.get ("/" , (req ,res ) =>{
 app.get ("/getCoctail", getCoctail);
 app.post ("/getCoctail/fav", addCoctail);
 app.get ("/getCoctail/fav", getFavorite);
+app.delete ("/getCoctail/fav/:c_id", deleteFavorite);
+
 
 
 
